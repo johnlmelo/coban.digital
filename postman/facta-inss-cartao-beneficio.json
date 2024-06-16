@@ -1,0 +1,502 @@
+{
+    "info": {
+        "name": "APIs FACTA INSS Cartão Benefício",
+        "description": "Coleção de exemplos de uso das APIs para consulta e simulação de operações INSS Cartão Benefício.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Gerar Token de Autenticação",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Basic NTAyNDoxXjM0LQ=="
+                    }
+                ],
+                "url": {
+                    "raw": "https://webservice-homol.facta.com.br/gera-token",
+                    "protocol": "https",
+                    "host": [
+                        "webservice-homol",
+                        "facta",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "gera-token"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Consulta de Operações Disponíveis",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": {
+                    "raw": "https://webservice-homol.facta.com.br/proposta/operacoes-disponiveis?produto=D&tipo_operacao=33&averbador=3&convenio=3&opcao_valor=1&valor=2000&cpf=00000000000&data_nascimento=00/00/0000&valor_renda=1212.00",
+                    "protocol": "https",
+                    "host": [
+                        "webservice-homol",
+                        "facta",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "proposta",
+                        "operacoes-disponiveis"
+                    ],
+                    "query": [
+                        {
+                            "key": "produto",
+                            "value": "D"
+                        },
+                        {
+                            "key": "tipo_operacao",
+                            "value": "33"
+                        },
+                        {
+                            "key": "averbador",
+                            "value": "3"
+                        },
+                        {
+                            "key": "convenio",
+                            "value": "3"
+                        },
+                        {
+                            "key": "opcao_valor",
+                            "value": "1"
+                        },
+                        {
+                            "key": "valor",
+                            "value": "2000"
+                        },
+                        {
+                            "key": "cpf",
+                            "value": "00000000000"
+                        },
+                        {
+                            "key": "data_nascimento",
+                            "value": "00/00/0000"
+                        },
+                        {
+                            "key": "valor_renda",
+                            "value": "1212.00"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Simulação de Valores da Operação",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "produto",
+                            "value": "D",
+                            "type": "text"
+                        },
+                        {
+                            "key": "tipo_operacao",
+                            "value": "33",
+                            "type": "text"
+                        },
+                        {
+                            "key": "averbador",
+                            "value": "3",
+                            "type": "text"
+                        },
+                        {
+                            "key": "convenio",
+                            "value": "3",
+                            "type": "text"
+                        },
+                        {
+                            "key": "cpf",
+                            "value": "00000000000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "data_nascimento",
+                            "value": "00/00/0000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "login_certificado",
+                            "value": "0000_teste",
+                            "type": "text"
+                        },
+                        {
+                            "key": "prazo",
+                            "value": "00",
+                            "type": "text"
+                        },
+                        {
+                            "key": "codigo_tabela",
+                            "value": "00000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "valor_operacao",
+                            "value": "0000.00",
+                            "type": "text"
+                        },
+                        {
+                            "key": "valor_parcela",
+                            "value": "00.00",
+                            "type": "text"
+                        },
+                        {
+                            "key": "coeficiente",
+                            "value": "0.0000000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "valor_renda",
+                            "value": "0000.00",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "https://webservice-homol.facta.com.br/proposta/etapa1-simulador",
+                    "protocol": "https",
+                    "host": [
+                        "webservice-homol",
+                        "facta",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "proposta",
+                        "etapa1-simulador"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Cadastro de Dados Pessoais",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "id_simulador",
+                            "value": "0000000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "cpf",
+                            "value": "00000000000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "nome",
+                            "value": "TESTE DA SILVA",
+                            "type": "text"
+                        },
+                        {
+                            "key": "sexo",
+                            "value": "F",
+                            "type": "text"
+                        },
+                        {
+                            "key": "estado_civil",
+                            "value": "0",
+                            "type": "text"
+                        },
+                        {
+                            "key": "data_nascimento",
+                            "value": "00/00/0000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "rg",
+                            "value": "00000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "estado_rg",
+                            "value": "AA",
+                            "type": "text"
+                        },
+                        {
+                            "key": "orgao_emissor",
+                            "value": "AAA",
+                            "type": "text"
+                        },
+                        {
+                            "key": "data_expedicao",
+                            "value": "00/00/0000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "estado_natural",
+                            "value": "AA",
+                            "type": "text"
+                        },
+                        {
+                            "key": "cidade_natural",
+                            "value": "00000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "nacionalidade",
+                            "value": "0",
+                            "type": "text"
+                        },
+                        {
+                            "key": "celular",
+                            "value": "(001) 00000-0000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "email",
+                            "value": "cliente@provedor.com.br",
+                            "type": "text"
+                        },
+                        {
+                            "key": "renda",
+                            "value": "0000.00",
+                            "type": "text"
+                        },
+                        {
+                            "key": "cep",
+                            "value": "00000-000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "endereco",
+                            "value": "RUA A",
+                            "type": "text"
+                        },
+                        {
+                            "key": "numero",
+                            "value": "1",
+                            "type": "text"
+                        },
+                        {
+                            "key": "bairro",
+                            "value": "CENTRO",
+                            "type": "text"
+                        },
+                        {
+                            "key": "estado",
+                            "value": "AA",
+                            "type": "text"
+                        },
+                        {
+                            "key": "cidade",
+                            "value": "00000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "nome_mae",
+                            "value": "NAO DECLARADO",
+                            "type": "text"
+                        },
+                        {
+                            "key": "nome_pai",
+                            "value": "NAO DECLARADO",
+                            "type": "text"
+                        },
+                        {
+                            "key": "banco",
+                            "value": "000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "agencia",
+                            "value": "0000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "conta",
+                            "value": "000000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "matricula",
+                            "value": "0000000000",
+                            "type": "text"
+                        },
+                        {
+                            "key": "tipo_credito_nb",
+                            "value": "0",
+                            "type": "text"
+                        },
+                        {
+                            "key": "tipo_beneficio",
+                            "value": "00",
+                            "type": "text"
+                        },
+                        {
+                            "key": "estado_beneficio",
+                            "value": "AA",
+                            "type": "text"
+                        },
+                        {
+                            "key": "cliente_iletrado_impossibilitado",
+                            "value": "N",
+                            "type": "text"
+                        },
+                        {
+                            "key": "valor_patrimonio",
+                            "value": "1",
+                            "type": "text"
+                        },
+                        {
+                            "key": "beneficiario_nome_1",
+                            "value": "Joao da Silva",
+                            "type": "text"
+                        },
+                        {
+                            "key": "beneficiario_parentesco_1",
+                            "value": "Pai",
+                            "type": "text"
+                        },
+                        {
+                            "key": "beneficiario_percentual_1",
+                            "value": "90",
+                            "type": "text"
+                        },
+                        {
+                            "key": "beneficiario_nome_2",
+                            "value": "Pedro da Silva",
+                            "type": "text"
+                        },
+                        {
+                            "key": "beneficiario_parentesco_2",
+                            "value": "Filho",
+                            "type": "text"
+                        },
+                        {
+                            "key": "beneficiario_percentual_2",
+                            "value": "10",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "https://webservice-homol.facta.com.br/proposta/etapa2-dados-pessoais",
+                    "protocol": "https",
+                    "host": [
+                        "webservice-homol",
+                        "facta",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "proposta",
+                        "etapa2-dados-pessoais"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Cadastro de Proposta",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "codigo_cliente",
+                            "value": "0000204",
+                            "type": "text"
+                        },
+                        {
+                            "key": "id_simulador",
+                            "value": "0000765",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "https://webservice-homol.facta.com.br/proposta/etapa3-proposta-cadastro",
+                    "protocol": "https",
+                    "host": [
+                        "webservice-homol",
+                        "facta",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "proposta",
+                        "etapa3-proposta-cadastro"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Envio de Link para Assinatura",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "codigo_af",
+                            "value": "00005127",
+                            "type": "text"
+                        },
+                        {
+                            "key": "tipo_envio",
+                            "value": "Whatsapp",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "https://webservice-homol.facta.com.br/proposta/envio-link",
+                    "protocol": "https",
+                    "host": [
+                        "webservice-homol",
+                        "facta",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "proposta",
+                        "envio-link"
+                    ]
+                }
+            }
+        }
+    ]
+}

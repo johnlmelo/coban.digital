@@ -1,0 +1,184 @@
+{
+    "info": {
+      "name": "Promosys API",
+      "description": "Coleção de endpoints para a API Promosys",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Token",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "https://jcf.promosysweb.com/services/token.php",
+            "protocol": "https",
+            "host": [
+              "jcf",
+              "promosysweb",
+              "com"
+            ],
+            "path": [
+              "services",
+              "token.php"
+            ]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"usuario\": \"seu_usuario\",\n  \"senha\": \"sua_senha\"\n}"
+          }
+        }
+      },
+      {
+        "name": "Créditos",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "https://jcf.promosysweb.com/services/creditos.php",
+            "protocol": "https",
+            "host": [
+              "jcf",
+              "promosysweb",
+              "com"
+            ],
+            "path": [
+              "services",
+              "creditos.php"
+            ]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"token\": \"seu_token\"\n}"
+          }
+        }
+      },
+      {
+        "name": "Benefícios",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "https://jcf.promosysweb.com/services/beneficios.php",
+            "protocol": "https",
+            "host": [
+              "jcf",
+              "promosysweb",
+              "com"
+            ],
+            "path": [
+              "services",
+              "beneficios.php"
+            ]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"token\": \"seu_token\",\n  \"cpf\": \"seu_cpf\"\n}"
+          }
+        }
+      },
+      {
+        "name": "Solicita Benefício Online",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "https://jcf.promosysweb.com/services/solicitaBeneficio.php",
+            "protocol": "https",
+            "host": [
+              "jcf",
+              "promosysweb",
+              "com"
+            ],
+            "path": [
+              "services",
+              "solicitaBeneficio.php"
+            ]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"token\": \"seu_token\",\n  \"beneficio\": 123456\n}"
+          }
+        }
+      },
+      {
+        "name": "Consulta Online",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "https://jcf.promosysweb.com/services/consulta.php",
+            "protocol": "https",
+            "host": [
+              "jcf",
+              "promosysweb",
+              "com"
+            ],
+            "path": [
+              "services",
+              "consulta.php"
+            ]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"token\": \"seu_token\",\n  \"beneficio\": \"seu_beneficio\"\n}"
+          }
+        }
+      },
+      {
+        "name": "Consulta Offline",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "https://jcf.promosysweb.com/services/consultaOffline.php",
+            "protocol": "https",
+            "host": [
+              "jcf",
+              "promosysweb",
+              "com"
+            ],
+            "path": [
+              "services",
+              "consultaOffline.php"
+            ]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"token\": \"seu_token\",\n  \"beneficio\": \"seu_beneficio\"\n}"
+          }
+        }
+      }
+    ]
+  }
+  

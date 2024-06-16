@@ -1,0 +1,276 @@
+{
+    "info": {
+        "name": "APIs Corban Banco Master",
+        "description": "Coleção de exemplos de uso das APIs para a efetivação de propostas Credcesta via APIs no processo de homologação.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Obter Token",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"usuario\": \"{{usuario-parceiro}}\",\n  \"senha\": \"{{senha-parceiro}}\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://hml-api-parceiro.bancomaster.com.br/token",
+                    "protocol": "https",
+                    "host": [
+                        "hml-api-parceiro",
+                        "bancomaster",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "token"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Consultar Convênios Permitidos",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": {
+                    "raw": "https://hml-api-parceiro.bancomaster.com.br/consignado/v1/cliente/convenio-permitido/",
+                    "protocol": "https",
+                    "host": [
+                        "hml-api-parceiro",
+                        "bancomaster",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "consignado",
+                        "v1",
+                        "cliente",
+                        "convenio-permitido"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Consultar Convênio por CPF",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": {
+                    "raw": "https://hml-api-parceiro.bancomaster.com.br/consignado/v1/cliente/consulta-cpf?cpfRequest={{cpf}}",
+                    "protocol": "https",
+                    "host": [
+                        "hml-api-parceiro",
+                        "bancomaster",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "consignado",
+                        "v1",
+                        "cliente",
+                        "consulta-cpf"
+                    ],
+                    "query": [
+                        {
+                            "key": "cpfRequest",
+                            "value": "{{cpf}}"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Consultar Limites Disponíveis",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": {
+                    "raw": "https://hml-api-parceiro.bancomaster.com.br/consignado/v1/limite/consultar/{{cpf}}/{{idConvenio}}",
+                    "protocol": "https",
+                    "host": [
+                        "hml-api-parceiro",
+                        "bancomaster",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "consignado",
+                        "v1",
+                        "limite",
+                        "consultar",
+                        "{{cpf}}",
+                        "{{idConvenio}}"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Incluir Cliente Novo",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"cpf\": \"{{cpf}}\",\n  \"idConvenio\": \"{{idConvenio}}\",\n  \"gestor\": \"{{gestor}}\",\n  \"orgao\": \"{{orgao}}\",\n  \"matricula\": \"{{matricula}}\",\n  \"cdLogo\": \"{{cdLogo}}\",\n  \"beneficiario\": \"{{beneficiario}}\",\n  \"nome\": \"{{nome}}\",\n  \"nomeResumido\": \"{{nomeResumido}}\",\n  \"flSexo\": \"{{flSexo}}\",\n  \"nomePai\": \"{{nomePai}}\",\n  \"nomeMae\": \"{{nomeMae}}\",\n  \"estadoCivil\": \"{{estadoCivil}}\",\n  \"cdRg\": \"{{cdRg}}\",\n  \"ufEmissorRg\": \"{{ufEmissorRg}}\",\n  \"emissorRg\": \"{{emissorRg}}\",\n  \"dataExpedicaoRg\": \"{{dataExpedicaoRg}}\",\n  \"naturalidade\": \"{{naturalidade}}\",\n  \"nacionalidade\": \"{{nacionalidade}}\",\n  \"profissao\": \"{{profissao}}\",\n  \"tipoResidencia\": \"Casa\",\n  \"enderecoRes\": \"{{enderecoRes}}\",\n  \"numeroRes\": \"{{numeroRes}}\",\n  \"complementoRes\": \"{{complementoRes}}\",\n  \"bairroRes\": \"{{bairroRes}}\",\n  \"cidadeRes\": \"{{cidadeRes}}\",\n  \"ufRes\": \"{{ufRes}}\",\n  \"cdCepRes\": \"{{cdCepRes}}\",\n  \"celular\": \"{{celular}}\",\n  \"dataNascimento\": \"{{dataNascimento}}\",\n  \"email\": \"{{email}}\",\n  \"tipoConta\": 0,\n  \"cdBanco\": \"{{cdBanco}}\",\n  \"cdAgencia\": \"{{cdAgencia}}\",\n  \"cdConta\": \"{{cdConta}}\",\n  \"situacaoServidor\": \"{{situacaoServidor}}\",\n  \"dtInicioAdmissao\": \"{{dtInicioAdmissao}}\",\n  \"dtFinalAdmissao\": \"{{dtFinalAdmissao}}\",\n  \"vlRenda\": 0,\n  \"dsMotivo\": \"{{dsMotivo}}\",\n  \"possuiRepresentanteLegal\": true,\n  \"cpfRepresentanteLegal\": \"{{cpfRepresentanteLegal}}\",\n  \"nomeRepresentanteLegal\": \"{{nomeRepresentanteLegal}}\",\n  \"flPagamentoContaRepresentanteLegal\": true,\n  \"salarioLiquido\": 0,\n  \"idRelacaoSituacaoFuncional\": 0,\n  \"matriculaInstituidor\": \"{{matriculaInstituidor}}\",\n  \"dadosBeneficio\": {\n    \"ufBeneficio\": \"{{ufBeneficio}}\",\n    \"tipoBeneficio\": {\n      \"numero\": \"{{numero}}\",\n      \"nome\": \"{{nome}}\"\n    },\n    \"formaRecebimento\": \"{{formaRecebimento}}\"\n  }\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://hml-api-parceiro.bancomaster.com.br/consignado/v1/cliente/incluir-novo",
+                    "protocol": "https",
+                    "host": [
+                        "hml-api-parceiro",
+                        "bancomaster",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "consignado",
+                        "v1",
+                        "cliente",
+                        "incluir-novo"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Incluir Limite para Cliente Novo",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"cpf\": \"{{cpf}}\",\n  \"idConvenio\": \"{{idConvenio}}\",\n  \"matricula\": \"{{matricula}}\",\n  \"vlMargem\": {{vlMargem}}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://hml-api-parceiro.bancomaster.com.br/consignado/v1/limite/incluir",
+                    "protocol": "https",
+                    "host": [
+                        "hml-api-parceiro",
+                        "bancomaster",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "consignado",
+                        "v1",
+                        "limite",
+                        "incluir"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Simular Proposta",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"cpf\": \"{{cpf}}\",\n  \"idConvenio\": \"{{idConvenio}}\",\n  \"matricula\": \"{{matricula}}\",\n  \"valor\": {{valor}},\n  \"parcelas\": {{parcelas}},\n  \"tipoSaque\": \"{{tipoSaque}}\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://hml-api-parceiro.bancomaster.com.br/consignado/v1/simulacao",
+                    "protocol": "https",
+                    "host": [
+                        "hml-api-parceiro",
+                        "bancomaster",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "consignado",
+                        "v1",
+                        "simulacao"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Incluir Proposta",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"cpf\": \"{{cpf}}\",\n  \"nsu\": \"{{nsu}}\",\n  \"idConvenio\": \"{{idConvenio}}\",\n  \"alterarDadosBancarios\": false,\n  \"telefone\": \"\",\n  \"celular\": \"{{celular}}\",\n  \"email\": \"\",\n  \"idAverbacao\": \"\",\n  \"tipoConta\": \"1\",\n  \"banco\": \"001\",\n  \"agencia\": \"1234\",\n  \"conta\": \"03040506\",\n  \"digito\": \"0\",\n  \"aceitaPctVantagens\": true,\n  \"designarBeneficiarioCredcesta\": false,\n  \"cpfBeneficiarioCredcesta\": \"\",\n  \"nomeBeneficiarioCredcesta\": \"\",\n  \"parentescoBeneficiarioCredcesta\": \"\",\n  \"dataNascimentoBeneficiarioCredcesta\": \"2022-10-14T13:32:32.168Z\",\n  \"idCanalVenda\": 2,\n  \"cpfDigitador\": \"{{cpfDigitador}}\",\n  \"salarioLiquido\": 0,\n  \"preVenda\": true,\n  \"faixaPctVantagens\": \"1\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://hml-api-parceiro.bancomaster.com.br/consignado/v1/efetivar",
+                    "protocol": "https",
+                    "host": [
+                        "hml-api-parceiro",
+                        "bancomaster",
+                        "com",
+                        "br"
+                    ],
+                    "path": [
+                        "consignado",
+                        "v1",
+                        "efetivar"
+                    ]
+                }
+            }
+        }
+    ]
+}

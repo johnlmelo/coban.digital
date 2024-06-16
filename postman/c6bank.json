@@ -1,0 +1,130 @@
+{
+    "info": {
+        "name": "APIs FGTS C6 Bank",
+        "description": "Coleção de exemplos de uso das APIs para simulação e contratação de saque aniversário FGTS.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Gerar Token de Autenticação",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                    }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "username",
+                            "value": "99999999999_000001",
+                            "type": "text"
+                        },
+                        {
+                            "key": "password",
+                            "value": "c6Bank@1234",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "https://marketplace-proposal-service-api-h.c6bank.info/auth/token",
+                    "protocol": "https",
+                    "host": [
+                        "marketplace-proposal-service-api-h",
+                        "c6bank",
+                        "info"
+                    ],
+                    "path": [
+                        "auth",
+                        "token"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Simulação de Antecipação de Saque Aniversário FGTS - Quantidade de Parcelas",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "ACCESS_TOKEN"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/vnd.c6bank_fgts_simulation_v2+json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": {
+                        "simulation_type": "BY_INSTALLMENT_QUANTITY",
+                        "covenant_code": "610002",
+                        "tax_identifier": "38538776991",
+                        "birth_date": "1975-10-18",
+                        "promoter_code": "000001",
+                        "installment_quantity": 2
+                    }
+                },
+                "url": {
+                    "raw": "https://marketplace-proposal-service-api-h.c6bank.info/marketplace/proposal/fgts/simulation",
+                    "protocol": "https",
+                    "host": [
+                        "marketplace-proposal-service-api-h",
+                        "c6bank",
+                        "info"
+                    ],
+                    "path": [
+                        "marketplace",
+                        "proposal",
+                        "fgts",
+                        "simulation"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Consulta de Proposta",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "ACCESS_TOKEN"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/vnd.c6bank_fgts_consult_v1+json"
+                    }
+                ],
+                "url": {
+                    "raw": "https://marketplace-proposal-service-api-h.c6bank.info/marketplace/proposal?proposalNumber=410161382",
+                    "protocol": "https",
+                    "host": [
+                        "marketplace-proposal-service-api-h",
+                        "c6bank",
+                        "info"
+                    ],
+                    "path": [
+                        "marketplace",
+                        "proposal"
+                    ],
+                    "query": [
+                        {
+                            "key": "proposalNumber",
+                            "value": "410161382"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
