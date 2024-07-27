@@ -22,11 +22,19 @@ function transformDateTime(dateTimeStr) {
     return isoString.split('.')[0];
 }
 
-function sendResponse(codigo, mensagem){
-    
-}
+
+function formatDate(dateStr) {
+    let parts = dateStr.includes('/') ? dateStr.split('/') : dateStr.split('-');
+    if (parts[2].length === 4) {
+        var data = `${parts[2]}-${parts[1]}-${parts[0]}`;
+    } else {
+        var data =  `${parts[0]}-${parts[1]}-${parts[2]}`;
+    }
+    return data;
+  }
 
 module.exports = {
     limparString,
-    transformDateTime
+    transformDateTime,
+    formatDate
 }

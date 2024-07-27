@@ -1,74 +1,79 @@
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
+const axios = require('axios');
+const FormData = require('form-data');
 
 const tokenFilePath = path.join(__dirname, 'tokenData.json');
-const {transformDateTime} = require('../../../helpers/utils');
 const AMBIENTE = process.env.AMBIENTE;
 const PROMO_URL = AMBIENTE === "prod" ? process.env.PROMOSYS_URL_PROD : process.env.PROMOSYS_URL_HOM;
-const PROMOSYS_USER = AMBIENTE === process.env.PROMOSYS_USER;
-const PROMOSYS_PASS = AMBIENTE === process.env.PROMOSYS_PASS;
+const PROMOSYS_USER = process.env.PROMOSYS_USER;
+const PROMOSYS_PASS = process.env.PROMOSYS_PASS;
 
 const GetToken = async (req, res, next) => {
-
     const url = PROMO_URL + '/services/token.php'; 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            usuario: PROMOSYS_USER,
-            senha: PROMOSYS_PASS
-        })
-    };
 
     function generateFutureTimestamp() {
         const now = new Date();
         const futureTimestamp = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Adiciona 24 horas
-        return futureTimestamp.toISOString(); // Retorna o timestamp em formato ISO
+        return futureTimestamp; // Retorna o timestamp em formato ISO
     }
 
     // Função para ler o token do arquivo
-    function readTokenFile() {
+    async function readTokenFile() {
         if (fs.existsSync(tokenFilePath)) {
             return JSON.parse(fs.readFileSync(tokenFilePath, 'utf8'));
+        } else {
+            console.log("Arquivo de token não existe!");
         }
         return null;
     }
 
     // Função para salvar o token no arquivo
-    function saveTokenFile(tokenData) {
+    async function saveTokenFile(tokenData) {
         fs.writeFileSync(tokenFilePath, JSON.stringify(tokenData), 'utf8');
     }
 
-    const tokenData = readTokenFile();
-    const verifyData =  new Date(transformDateTime(tokenData.expira)) > new Date();
-
-    console.log('verifyData', verifyData);
-    console.log('Expiração', new Date(transformDateTime(tokenData.expira)));
-    console.log('Hoje', new Date());
+    const tokenData = await readTokenFile();
+    const verifyData = tokenData && new Date(tokenData.expira) > new Date();
 
     if (tokenData && tokenData.token && verifyData) {
-        req.query['token'] = tokenData.token;
+        console.log('Token existente e válido!', tokenData);
+        req.body['token'] = tokenData.token;
         next();
     } else {
+        console.log('Token inexistente ou expirado');
         try {
-            const response = await fetch(url, options);
-            const data = await response.json();
-            if (!data.erro) {
-                const newData = { token: data.token, expira: generateFutureTimestamp() };
-                saveTokenFile(newData);
-                req.query['token'] = data.token;
+            const data = new FormData();
+            data.append('usuario', PROMOSYS_USER);
+            data.append('senha', PROMOSYS_PASS);
+
+            const config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: url,
+                headers: {
+                    ...data.getHeaders()
+                },
+                data: data
+            };
+            
+            const getResult = await axios.request(config);
+            const result = getResult.data;
+
+            if (result && result.Token) {
+                console.log('Novo token obtido', result);
+                req.body['token'] = result.Token;
+                const newData = { token: result.Token, expira: generateFutureTimestamp() };
+                await saveTokenFile(newData);
+                next();
             } else {
-                req.query['token'] = 'Erro';
+                throw new Error('Resposta inválida ao obter o token');
             }
-            next();
         } catch (error) {
-            req.query['token'] = 'Erro';
-            next();
+            console.error('Erro ao obter o token:', error);
+            res.status(500).json({ msg: 'Erro ao consultar beneficios', error: error.message });
         }
     }
-}
+};
 
 module.exports = GetToken;

@@ -5,34 +5,31 @@ const FormData = require('form-data');
 
 module.exports = async (req, res, next) => {
 
-  const { cpf } = req.params;
+  const { beneficio } = req.params;
   const { token } = req.body;
 
   try {
+
     const data = new FormData();
     data.append('token', token);
-    data.append('cpf', cpf);
+    data.append('beneficio', beneficio);
 
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: PROMO_URL + '/services/beneficios.php',
+      url: PROMO_URL + '/services/consultaOffline.php',
       headers: { 
+        'Content-Type': 'application/json', 
         ...data.getHeaders()
       },
-      data: data
+      data : data
     };
 
     const result = await axios.request(config);
+
     res.json(result.data);
 
   } catch (error) {
-    console.error('Error Details:', {
-      message: error.message,
-      response: error.response ? error.response.data : 'No response data',
-      status: error.response ? error.response.status : 'No response status',
-      headers: error.response ? error.response.headers : 'No response headers'
-    });
-    res.status(500).json({ msg: 'Erro ao consultar beneficios', error: error.message });
+    res.status(500).json({ msg: 'Erro ao solicitar beneficios', error: error });
   }
 };

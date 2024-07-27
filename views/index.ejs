@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CJ2 Operações</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper" style="font-size: 26px;text-align: center;">
+            CJ2 Integrações
+        </div>
+    </nav>
+    <main
+        style="display: flex;width: 100%;justify-content: center;align-items: center;"
+    >
+
+        <div 
+            class="row"
+            style="width: 100%;display: flex;"
+        >
+            <div 
+                id="card"
+                class="col s12 m6"
+                style="display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: flex-start;
+                align-items: center;
+                width: 100%;"
+            >
+              
+            </div>
+          </div>
+    </main>
+
+    <script>
+        const bots = [
+            {
+                title: 'FACTA INSS',
+                description: 'Bot de vendas de emprestimos para beneficiários do INSS',
+                path: 'facta/inss',
+            },{
+                title: 'C6 Abertura de contas',
+                description: 'Bot de vendas de contas do C6 para empresas.',
+                path: 'c6-bank',
+            }
+        ]
+
+        function setCards(bots){
+
+            let cards = '';
+
+            bots.map((bot, index)=>{
+                cards += `<div class="card blue-grey darken-1" style="width: 300px;margin:20px;">
+                            <div class="card-content white-text">
+                                <span class="card-title">${bot.title}</span>
+                                <p>${bot.description}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="/${bot.path}">Acessar</a>
+                            </div>
+                        </div>`;
+            })
+
+            document.getElementById('card').innerHTML=cards;
+
+        }
+
+        setCards(bots);
+
+    </script>
+</body>
+</html>

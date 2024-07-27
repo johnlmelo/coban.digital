@@ -1,0 +1,19 @@
+{
+    "nome": "",
+    "sobrenome": "",
+    "data_nascimento": "",
+    "cpf": "",
+    "rg": "",
+    "email": "",
+    "telefone": "",
+    "endereco": {
+      "logradouro": "",
+      "numero": "",
+      "complemento": "",
+      "bairro": "",
+      "cidade": "",
+      "estado": "",
+      "cep": ""
+    }
+}
+  

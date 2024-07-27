@@ -1,0 +1,128 @@
+{
+  "etapas": [
+      {
+        "etapa": 1,
+        "mensagem": "Seja bem vindo a CJ2 Company!\r\n\r\nPara realizarmos a simulação de valores, por favor informe seu CPF (sem ponto e sem traço)",
+        "acao": {
+          "tipo": "input",
+          "campo": "cpf"
+        }
+      },
+      {
+        "etapa": 2,
+        "mensagem": "Perfeito! Agora me informe sua data de nascimento",
+        "acao": {
+          "tipo": "input",
+          "campo": "data_nascimento"
+        }
+      },
+      {
+        "etapa": 3,
+        "mensagem": "Show! Aguarde um minuto...",
+        "acao": {
+          "tipo": "api_call",
+          "metodo": "POST",
+          "mapa":["cpf","data_nascimento"],
+          "endpoint": "/facta/inss/operacoes-disponiveis",
+          "body":{
+            "cpf":"{cpf}",
+            "data_nascimento":"{data_nascimento}"
+          },
+          "subetapa": {
+            "mensagem": "Você tem o valor de R$ {valor_de_emprestimo} disponível. Deseja contratar?",
+            "mapa":["valor_de_emprestimo"],
+            "acao": {
+              "tipo": "choice",
+              "opcoes": [{
+                  "text": "Sim",
+                  "value": 1
+                },{
+                  "text": "Sim",
+                  "value": 2
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "etapa": 4,
+        "condicao": "Sim",
+        "mensagem": "",
+        "acao": {
+          "tipo": "api_call",
+          "metodo": "GET",
+          "endpoint": "/proposta/etapa1-simulador"
+        }
+      },
+      {
+        "etapa": 7,
+        "mensagem": "",
+        "acao": {
+          "tipo": "api_call",
+          "metodo": "GET",
+          "endpoint": "/promosys/consulta-beneficios/{cpf}"
+        }
+      },
+      {
+        "etapa": 8,
+        "mensagem": "Escolha qual o número do seu benefício",
+        "acao": {
+          "tipo": "input",
+          "campo": "beneficio"
+        }
+      },
+      {
+        "etapa": 9,
+        "mensagem": "",
+        "acao": {
+          "tipo": "api_call",
+          "metodo": "GET",
+          "endpoint": "/promosys/solicita-beneficio/{beneficio}"
+        }
+      },
+      {
+        "etapa": 10,
+        "mensagem": "",
+        "acao": {
+          "tipo": "api_call",
+          "metodo": "POST",
+          "endpoint": "/proposta/etapa2-dados-pessoais"
+        }
+      },
+      {
+        "etapa": 11,
+        "mensagem": "Aceita?",
+        "acao": {
+          "tipo": "escolha",
+          "opcoes": ["Sim", "Não"]
+        }
+      },
+      {
+        "etapa": 12,
+        "condicao": "Sim",
+        "mensagem": "",
+        "acao": {
+          "tipo": "api_call",
+          "metodo": "GET",
+          "endpoint": "/proposta/envio-link"
+        }
+      },
+      {
+        "etapa": 13,
+        "mensagem": "Assim que concluir a assinatura, me informa aqui que continuamos seu processo",
+        "acao": {
+          "tipo": "espera_assinatura"
+        }
+      },
+      {
+        "etapa": 14,
+        "condicao": "Não",
+        "mensagem": "Encaminhando para atendente...",
+        "acao": {
+          "tipo": "encaminhar_atendente"
+        }
+      }
+    ]
+}
+  

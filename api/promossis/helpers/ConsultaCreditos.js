@@ -1,19 +1,33 @@
-const fetch = require('node-fetch');
+const AMBIENTE = process.env.AMBIENTE;
+const PROMO_URL = AMBIENTE === "prod" ? process.env.PROMOSYS_URL_PROD : process.env.PROMOSYS_URL_HOM;
+const axios = require('axios');
+const FormData = require('form-data');
 
 module.exports = async (req, res, next) => {
+
+  const { token } = req.body;
+
   try {
-    const response = await fetch('https://jcf.promosysweb.com/services/creditos.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
+
+    const data = new FormData();
+    data.append('token', token);
+
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: PROMO_URL + '/services/creditos.php',
+      headers: { 
+        'Content-Type': 'application/json', 
+        ...data.getHeaders()
       },
-      body: JSON.stringify({
-        token: req.token
-      })
-    });
-    const data = await response.json();
-    res.json(data);
+      data : data
+    };
+
+    const result = await axios.request(config);
+
+    res.json(result.data);
+
   } catch (error) {
-    res.status(500).json({ error: 'Failed to consult credits' });
+    res.status(500).json({ msg: 'Erro ao consultar beneficios', error: error });
   }
 };
