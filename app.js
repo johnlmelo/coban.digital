@@ -4,7 +4,7 @@ const app = express();
 const path = require('path');
 const port = 3000;
 
-const sequelize = require('./config/database');
+// const sequelize = require('./config/database');
 
 require('dotenv').config();
 const bodyParser = require('body-parser');
@@ -35,7 +35,7 @@ app.use(express.urlencoded({
 // O servidor começa a ouvir a porta especificada
 app.listen(3000, async () => {
   try {
-    await sequelize.sync({ force: false }); // Sincroniza e cria as tabelas
+    //await sequelize.sync({ force: false }); // Sincroniza e cria as tabelas
     console.log('Servidor rodando na porta 3000');
   } catch (error) {
     console.error('Erro ao conectar ao banco de dados:', error);
