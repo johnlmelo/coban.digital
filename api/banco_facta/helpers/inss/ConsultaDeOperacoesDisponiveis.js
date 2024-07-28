@@ -9,7 +9,7 @@ async function findLowestTaxRate(data) {
     let minTaxTable = data.tabelas[0];
 
     data.tabelas.forEach(tabela => {
-        if (parseFloat(tabela.taxa) < parseFloat(minTaxTable.taxa)) {
+        if (parseFloat(tabela.taxa) > parseFloat(minTaxTable.taxa)) {
             minTaxTable = tabela;
         }
     });

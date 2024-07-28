@@ -1,8 +1,11 @@
 // Importa o módulo express
 const express = require('express');
+const setupSwagger = require('./swagger');
 const app = express();
 const path = require('path');
 const port = 3000;
+
+setupSwagger(app);
 
 // const sequelize = require('./config/database');
 
