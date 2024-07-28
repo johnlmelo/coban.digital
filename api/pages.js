@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/facta/inss', async (req, res) => {
-  const campaigns = await Campaign.findAll();
+  // const campaigns = await Campaign.findAll();
   res.render('facta-inss', { campaigns: campaigns });
 });
 
