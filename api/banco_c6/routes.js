@@ -11,14 +11,14 @@ const CadastroProposta = require('./helpers/inss/CadastroProposta');
 const GerarLinkAceite = require('./helpers/inss/GerarLinkAceite');
 
 // Criar um card
-app.get('/facta/gera-token', GeraToken, VerificarStatus);
-app.get('/facta/consulta-fgts/:cpf', GeraToken, ConsultaFGTS);
+app.get('/c6/gera-token', GeraToken, VerificarStatus);
+app.get('/c6/consulta-fgts/:cpf', GeraToken, ConsultaFGTS);
 
 // INSS
-app.post('/facta/inss/operacoes-disponiveis', GeraToken, ConsultaDeOperacoesDisponiveis);
-app.post('/facta/inss/simular-valores', GeraToken, SimularValores);
-app.post('/facta/inss/cadastro-dados-pessoais', GeraToken, CadastroDadosPessoais);
-app.post('/facta/inss/cadastro-proposta', GeraToken, CadastroProposta);
-app.post('/facta/inss/gera-link-aceite', GeraToken, GerarLinkAceite);
+app.post('/c6/inss/operacoes-disponiveis', GeraToken, ConsultaDeOperacoesDisponiveis);
+app.post('/c6/inss/simular-valores', GeraToken, SimularValores);
+app.post('/c6/inss/cadastro-dados-pessoais', GeraToken, CadastroDadosPessoais);
+app.post('/c6/inss/cadastro-proposta', GeraToken, CadastroProposta);
+app.post('/c6/inss/gera-link-aceite', GeraToken, GerarLinkAceite);
 
 module.exports = app;
