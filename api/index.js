@@ -1,6 +1,7 @@
 const Pages = require('./pages');
 const FactaBank = require('./banco_facta/routes');
 const Promosys = require('./promossis/routes');
+const Master = require('./banco_master/routes');
 // const Whatsapp = require('./whatsapp/routes');
 
 const setupRoutes = (app) => {
@@ -8,6 +9,7 @@ const setupRoutes = (app) => {
     app.use('/', Promosys);
     // app.use('/', Whatsapp);
     app.use('/', Pages);
+    app.use('/', Master);
 };
 
 module.exports = setupRoutes;
