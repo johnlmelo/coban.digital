@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const fetch = require('node-fetch');
 const tokenFilePath = path.join(__dirname, 'tokenData.json');
 const AMBIENTE = process.env.AMBIENTE;
 const MASTER_USUARIO = process.env.MASTER_USUARIO;
