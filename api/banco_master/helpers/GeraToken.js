@@ -118,7 +118,7 @@ const GetToken = async (req, res, next) => {
                 if (error.message === 'Token expirado ou inválido') {
                     console.log('Token inválido após consulta, gerando novo token...');
                 } else {
-                    return res.status(500).json({ error: 'Erro ao validar o token no endpoint de convenio', details: error.message });
+                    return res.status(500).json({ error: 'Erro ao validar o token no endpoint de convenio', details: error });
                 }
             }
         }
