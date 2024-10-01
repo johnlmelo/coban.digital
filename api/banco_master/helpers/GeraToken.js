@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
+const axios = require('axios'); // Substituindo fetch por axios
 const tokenFilePath = path.join(__dirname, 'tokenData.json');
 const AMBIENTE = process.env.AMBIENTE;
 const MASTER_USUARIO = process.env.MASTER_USUARIO;
@@ -43,24 +43,18 @@ const calcularDataFutura = (milissegundos) => {
 const obterToken = async () => {
     const url = MASTER_URL + '/token';
     const options = {
-        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "usuario": MASTER_USUARIO,
-            "senha": MASTER_SENHA
-        })
+        }
     };
 
     try {
-        const response = await fetch(url, options);
+        const response = await axios.post(url, {
+            usuario: MASTER_USUARIO,
+            senha: MASTER_SENHA
+        }, options);
 
-        if (!response.ok) {
-            throw new Error(`Erro ao gerar o token: ${response.statusText}`);
-        }
-
-        const data = await response.json();
+        const data = response.data;
         tokenData.token = data.accessToken;
         tokenData.expiracao = calcularDataFutura(data.expiresIn);
 
@@ -78,18 +72,17 @@ const obterToken = async () => {
 const consultaConvenioPermitido = async (token) => {
     const url = MASTER_URL + '/consignado/v1/cliente/convenio-permitido';
     const options = {
-        method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
         }
     };
 
     try {
-        const response = await fetch(url, options);
+        const response = await axios.get(url, options);
 
         if (response.status === 200 || response.status === 201) {
             console.log('Consulta realizada com sucesso.');
-            return await response.json();
+            return response.data;
         }
 
         if (response.status === 401) {
