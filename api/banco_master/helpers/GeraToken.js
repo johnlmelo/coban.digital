@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios'); // Substituindo fetch por axios
+const axios = require('axios');
 const tokenFilePath = path.join(__dirname, 'tokenData.json');
 const AMBIENTE = process.env.AMBIENTE;
 const MASTER_USUARIO = process.env.MASTER_USUARIO;
@@ -31,6 +31,13 @@ const saveTokenData = (data) => {
     } catch (err) {
         console.error('Erro ao salvar o token no arquivo.', err);
     }
+};
+
+// Função para verificar se o token está expirado
+const isTokenExpired = () => {
+    const expiracao = new Date(tokenData.expiracao);
+    const agora = new Date();
+    return expiracao <= agora;
 };
 
 const calcularDataFutura = (milissegundos) => {
@@ -104,9 +111,7 @@ const GetToken = async (req, res, next) => {
         tokenData = loadTokenData();
 
         // Verifica se o token está presente e se a data de expiração é válida
-        const verifyData = tokenData.token;
-
-        if (verifyData) {
+        if (tokenData.token && !isTokenExpired()) {
             try {
                 // Tenta consultar o endpoint para validar se o token é aceito
                 await consultaConvenioPermitido(tokenData.token);
@@ -118,12 +123,12 @@ const GetToken = async (req, res, next) => {
                 if (error.message === 'Token expirado ou inválido') {
                     console.log('Token inválido após consulta, gerando novo token...');
                 } else {
-                    return res.status(500).json({ error: 'Erro ao validar o token no endpoint de convenio', details: error });
+                    return res.status(500).json({ error: 'Erro ao validar o token no endpoint de convenio', details: error.message });
                 }
             }
         }
 
-        // Se o token não for válido ou deu erro na consulta, gera um novo token
+        // Se o token não for válido ou expirado, gera um novo token
         console.log('Gerando um novo token...');
         const novoToken = await obterToken();
         req.body['token'] = novoToken;
