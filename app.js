@@ -36,7 +36,7 @@ app.use(express.urlencoded({
 }));
 
 // O servidor começa a ouvir a porta especificada
-app.listen(3000, async () => {
+app.listen(80, async () => {
   try {
     //await sequelize.sync({ force: false }); // Sincroniza e cria as tabelas
     console.log('Servidor rodando na porta 3000');
