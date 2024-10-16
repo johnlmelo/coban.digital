@@ -1,0 +1,42 @@
+{
+    "info": {
+      "name": "CartaoBmg Conta Simples",
+      "_postman_id": "b12345a-123b-4b56-9ab3-23456de7890c",
+      "description": "Coleção para testar o WebService CartaoBmgContaSimples",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "gravarPropostaCartaoBmgSimples",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"login\": \"usuarioRobo\",\n  \"senha\": \"senhaRobo\",\n  \"loginConsig\": \"usuarioLoja\",\n  \"senhaConsig\": \"senhaLoja\",\n  \"codigoServico\": \"124\",\n  \"codigoEntidade\": \"001\",\n  \"sequencialOrgao\": 164,\n  \"matricula\": \"123456\",\n  \"codigoSituacaoServidor\": 1,\n  \"nome\": \"Nome Cliente\",\n  \"nomeConjuge\": \"Nome Conjuge\",\n  \"nomeMae\": \"Nome da Mae\",\n  \"nomePai\": \"Nome do Pai\",\n  \"estadoCivil\": \"S\",\n  \"sexo\": \"M\",\n  \"cpf\": \"12345678900\",\n  \"cnpjEmpregador\": \"12345678000199\"\n}"
+          },
+          "url": {
+            "raw": "https://ws1.bmgconsig.com.br/webservices/CartaoBmgContaSimples",
+            "protocol": "https",
+            "host": [
+              "ws1",
+              "bmgconsig",
+              "com",
+              "br"
+            ],
+            "path": [
+              "webservices",
+              "CartaoBmgContaSimples"
+            ]
+          }
+        },
+        "response": []
+      }
+    ]
+  }

@@ -1,0 +1,42 @@
+{
+    "info": {
+      "name": "CartaoBmg Card",
+      "_postman_id": "d23456b-456c-4c67-9ac3-67890de1234f",
+      "description": "Coleção para testar o WebService CartaoBmgCard",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "gravarPropostaCartao",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"login\": \"usuarioRobo\",\n  \"senha\": \"senhaRobo\",\n  \"codigoServico\": \"080\",\n  \"tipoDocumentoIdentificacao\": \"RG\",\n  \"cpfAgente\": \"12345678900\",\n  \"Produto\": 80,\n  \"valorSaque\": 1000.00,\n  \"numeroParcelas\": 10,\n  \"valorParcela\": 100.00,\n  \"seguros\": [\n    {\n      \"capitalSegurado\": 50000.00,\n      \"valorDoSeguro\": 150.00,\n      \"tipoSeguro\": 1\n    }\n  ],\n  \"produtosLojistaParceiro\": [\n    {\n      \"codigoProduto\": 123,\n      \"descricaoProduto\": \"Produto Teste\",\n      \"valorDoProduto\": 200.00,\n      \"quandidade\": 1\n    }\n  ],\n  \"boletoPagamento\": {\n    \"tipoPagamento\": \"1\",\n    \"linhaDigitavel\": \"12345678901234567890123456789012345678901234\",\n    \"dataVencimento\": \"2024-12-31\",\n    \"valorPagamento\": 500.00,\n    \"Cedente\": \"Cedente Teste\",\n    \"Sacado\": \"Sacado Teste\"\n  }\n}"
+          },
+          "url": {
+            "raw": "https://ws1.bmgconsig.com.br/webservices/CartaoBmgCard",
+            "protocol": "https",
+            "host": [
+              "ws1",
+              "bmgconsig",
+              "com",
+              "br"
+            ],
+            "path": [
+              "webservices",
+              "CartaoBmgCard"
+            ]
+          }
+        },
+        "response": []
+      }
+    ]
+  }
