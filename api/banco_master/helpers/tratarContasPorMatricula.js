@@ -10,7 +10,7 @@ const tratarContasPorMatricula = async (req, res) =>  {
 
     const filterMatricula = contas.find(item => item.matricula == matricula) || [];
     
-    return res.status(200).json(filterMatricula);
+    return res.status(200).json({res: filterMatricula});
     
 }
 
