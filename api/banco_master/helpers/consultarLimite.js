@@ -5,7 +5,7 @@ const AMBIENTE = process.env.AMBIENTE;
 const MASTER_URL = AMBIENTE === "prod" ? process.env.MASTER_URL_PROD : process.env.MASTER_URL_HOM;
 
 const obterLimite = async (cpf, convenioId, token) => {
-    const url = MASTER_URL + `/consignado/v1/limite/consultar/${cpf}/${convenioId}`;
+    const url = `https://hml-api-parceiro.bancomaster.com.br/consignado/v1/limite/consultar/${cpf}/${convenioId}`;
     const options = {
         headers: {
             'Content-Type': 'application/json',
