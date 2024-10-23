@@ -32,7 +32,7 @@ const obterConvenio = async (cpf, token) => {
 
 const consultaConvenio = async (req, res) =>  {
     
-    const resposta = await obterConvenio(req.params.cpf, req.params.convenioId, req.body.token);
+    const resposta = await obterConvenio(req.params.cpf, req.body.token);
     
     const cadastros = {
         res: resposta,
